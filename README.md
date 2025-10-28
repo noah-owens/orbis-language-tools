@@ -9,4 +9,4 @@ The official VSCode language extension for *Orbis Definition Language* (short: o
 
 ## Known Issues
 
-Not currently handling strings quite right. Fix in progress.
+Syntax highlighting inconsistencies. Fix in progress.

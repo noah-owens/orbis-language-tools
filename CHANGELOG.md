@@ -8,7 +8,16 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
+- Syntax highlight for component block
+- Syntax highlight for trait block
+
 ### Changed
+
+- Syntax highlight for entity block fields
+
+### Fixed
+
+- String handling within entity blocks
 
 ### Removed
 

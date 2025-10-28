@@ -6,6 +6,9 @@
 			"include": "#entity-block"
 		},
 		{
+			"include": "#trait-block"
+		},
+		{
 			"include": "#strings"
 		}
 	],
@@ -16,6 +19,48 @@
       			"1": { "name": "keyword.declaration.entity.orbis" },
       			"2": { "name": "entity.name.type.orbis" }
     		},
+			"patterns": [
+				{
+					"name": "variable.parameter.entity.orbis",
+					"match": "^\\s*(name|description|aliases|tags)\\b"
+     			},
+				{
+					"name": "variable.other.entity.orbis",
+					"match": "^\\s*(trait)\\b"
+     			},
+				{
+					"include": "#component-block"
+				},
+				{
+					"include": "#strings"
+				}
+			],
+			"end": "\\}"
+		},
+		"trait-block": {
+			"begin": "\\b(trait)\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures": {
+      			"1": { "name": "keyword.declaration.trait.orbis" },
+      			"2": { "name": "trait.name.type.orbis" }
+    		},
+			"patterns": [
+				{
+					"include": "#strings"
+				}
+			],
+			"end": "\\}"
+		},
+		"component-block": {
+			"begin": "\\b(component)\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures": {
+      			"1": { "name": "keyword.declaration.component.orbis" },
+      			"2": { "name": "component.name.type.orbis" }
+    		},
+			"patterns": [
+				{
+					"include": "#strings"
+				}
+			],
 			"end": "\\}"
 		},
 		"strings": {
