@@ -1,0 +1,25 @@
+{
+  "name": "orbis-language-tools",
+  "displayName": "Orbis Language Tools",
+  "description": "Syntax highlighting and code completion for Orbis Definition Language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "orbis",
+      "aliases": ["Orbis Definition Language", "orbis"],
+      "extensions": [".orb"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "orbis",
+      "scopeName": "source.orbis",
+      "path": "./syntaxes/orbis.tmLanguage.json"
+    }]
+  }
+}
