@@ -13,7 +13,7 @@
     "languages": [{
       "id": "orbis",
       "aliases": ["Orbis Definition Language", "orbis"],
-      "extensions": [".orb"],
+      "extensions": [".orb", ".mud"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
