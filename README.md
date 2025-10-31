@@ -5,8 +5,4 @@ The official VSCode language extension for *Orbis Definition Language* (short: o
 ## Features
 
 - Syntax Highlighting (in-progress)
-- Intellisense/Code Completion (coming soon)
-
-## Known Issues
-
-React block internals break syntax highlighting. Fix in progress.
+- Code Completion (coming soon)

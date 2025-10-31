@@ -14,6 +14,20 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Removed
 
+## [0.3.0] 2025-10-30
+
+### Added
+- Complete syntax highlighting for:
+  - entities 
+  - traits
+  - commands
+
+### Changed
+- Prettified JSON
+
+### Fixed
+- Nested block syntax highlighting
+
 ## [0.2.0] 2025-10-27
 
 ### Added

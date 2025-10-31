@@ -1,191 +1,498 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Orbis Definition Language",
-	"patterns": [
+	"$schema":"https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name":"Orbis Definition Language",
+	"patterns":[
 		{
-			"include": "#entity-block"
+			"include":"#entity-block"
 		},
 		{
-			"include": "#trait-block"
+			"include":"#trait-block"
+		},
+		{
+			"include":"#command-block"
 		}
 	],
-	"repository": {
-		"entity-block": {
-			"begin": "\\b(entity)\\b\\s+(\\w+)\\s*\\{",
-			"beginCaptures": {
-      			"1": { "name": "keyword.declaration.entity.orbis" },
-      			"2": { "name": "entity.name.type.orbis" }
-    		},
-			"patterns": [
-				{ "include": "#common" },
-				{ "include": "#trait-block" },
-				{ "include": "#component-block" },
-				{ "include": "#react-block" }
+	"repository":{
+		"entity-block":{
+			"begin":"\\b(entity)\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"keyword.declaration.entity.orbis"
+				},
+				"2":{
+					"name":"entity.name.type.orbis"
+				}
+			},
+			"patterns":[
+				{
+					"include":"#common"
+				},
+				{
+					"include":"#trait-block"
+				},
+				{
+					"include":"#component-block"
+				},
+				{
+					"include":"#react-block"
+				}
 			],
-			"end": "\\}",
-			"name": "meta.block.entity.orbis"
+			"end":"\\}",
+			"name":"meta.block.entity.orbis"
 		},
-		"component-block": {
-			"begin": "\\b(component)\\b\\s+(\\w+)\\s*\\{",
-			"beginCaptures": {
-      			"1": { "name": "keyword.declaration.component.orbis" },
-      			"2": { "name": "entity.name.type.orbis" }
-    		},
-			"patterns": [
-				{ "include": "#common" },
-				{ "include": "#exits-block" },
-				{ "include": "#children-block" }
+		"component-block":{
+			"begin":"\\b(component)\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"keyword.declaration.component.orbis"
+				},
+				"2":{
+					"name":"entity.name.type.orbis"
+				}
+			},
+			"patterns":[
+				{
+					"include":"#common"
+				}
 			],
-			"end": "\\}",
-			"name": "meta.block.component.orbis"
-		},
-		"exits-block":{
-
-		},
-		"children-block":{
-
+			"end":"\\}",
+			"name":"meta.block.component.orbis"
 		},
 		"trait-reference":{
-			"patterns": [
+			"patterns":[
 				{
-					"name": "support.type.trait.reference.orbis",
-					"match": "\\btrait\\b\\s+(\\w+)\\s*$",
-					"captures": {
-					"0": { "name": "meta.trait.reference.orbis" },
-					"1": { "name": "entity.name.trait.reference.orbis" }
+					"name":"support.type.trait.reference.orbis",
+					"match":"\\btrait\\b\\s+(\\w+)\\s*$",
+					"captures":{
+						"0":{
+							"name":"meta.trait.reference.orbis"
+						},
+						"1":{
+							"name":"entity.name.trait.reference.orbis"
+						}
 					}
 				}
 			]
 		},
 		"trait-block":{
-			"begin": "\\btrait\\b\\s+(\\w+)\\s*\\{",
-			"beginCaptures": {
-				"0": { "name": "keyword.declaration.trait.orbis" },
-				"1": { "name": "entity.name.type.orbis" }
+			"begin":"\\btrait\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures":{
+				"0":{
+					"name":"keyword.declaration.trait.orbis"
+				},
+				"1":{
+					"name":"entity.name.type.orbis"
+				}
 			},
-			"end": "\\}",
-			"name": "meta.block.trait.orbis",
-			"patterns": [
-				{"include": "#strings"}
-			]
-		},
-		"react-block":{
-			"begin": "\\breact\\b\\s+(\\w+)\\s*\\{",
-			"beginCaptures": {
-				"0": { "name": "keyword.declaration.react.orbis" },
-				"1": { "name": "entity.name.react.orbis" }
-			},
-			"end": "\\}",
-			"name": "meta.block.react.orbis",
-			"patterns": [
-				{"include": "#expression-block"}
-			]
-		},
-		"expression-block":{
-			"begin": "\\b(when|then|expr)\\b\\s*\\{",
-			"beginCaptures": {
-				"1": { "name": "keyword.control.block.orbis" }
-			},
-			"end": "\\}",
-			"name": "meta.block.control.orbis",
-			"patterns": [
-				{"include": "#react-internals"},
-				{"include": "#variable-assignment"}
-			]
-		},
-		"react-internals":{
-			"patterns": [
-				{"include": "#set-assignment"},
-				{"include": "#functions"},
-				{"include": "#selectors"}
-			]
-		},
-		"functions": {
-			"patterns": [
+			"end":"\\}",
+			"name":"meta.block.trait.orbis",
+			"patterns":[
 				{
-				"name": "keyword.operator.print.orbis",
-				"match": "\\bprint\\b"
+					"include":"#common"
 				},
 				{
-				"name": "keyword.operator.copy.orbis",
-				"match": "\\bcopy\\b"
+					"include":"#component-block"
 				},
 				{
-				"name": "keyword.operator.publish.orbis",
-				"match": "\\bpublish\\b"
-				},
-				{
-				"name": "keyword.operator.set.orbis",
-				"match": "\\bset\\b"
+					"include":"#react-block"
 				}
 			]
 		},
-		"selectors":{
-        	"match": "\\b(source|target|message|instrument)\\.(\\w+)\\b",
-       		"captures": {
-          		"1": { "name": "variable.language.orbis" },
-          		"2": { "name": "variable.property.orbis" }
-			}
-		},
-		"common":{
-			"patterns": [
-				{ "include": "#fields" },
-				{ "include": "#variable-assignment" },
-				{ "include": "#trait-reference" },
-				{ "include": "#strings" }
+		"command-block":{
+			"begin":"\\bcommand\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures":{
+				"0":{
+					"name":"keyword.declaration.command.orbis"
+				},
+				"1":{
+					"name":"entity.name.command.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.command.orbis",
+			"patterns":[
+				{
+					"include":"#variable-assignment"
+				},
+				{
+					"include":"#pattern-block"
+				},
+				{
+					"include":"#common"
+				}
 			]
 		},
-		"set-assignment": {
-			"match": "\\bset\\b\\s+(\\w+)\\.(\\w+)\\s+to\\s+(\\w+)\\.(\\w+)",
-			"captures": {
-				"1": { "name": "variable.language.orbis" },
-				"2": { "name": "variable.property.orbis" },
-				"3": { "name": "variable.language.orbis" },
-				"4": { "name": "variable.property.orbis" }
+		"pattern-block":{
+			"begin":"\\bpattern\\b\\s*\\{",
+			"beginCaptures":{
+				"0":{
+					"name":"keyword.control.pattern.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.pattern.orbis",
+			"patterns":[
+				{
+					"include":"#variable-assignment"
+				},
+				{
+					"include":"#strings"
+				},
+				{
+					"include":"#interpolation"
+				},
+				{
+					"include":"#common"
+				}
+			]
+		},
+		"react-block":{
+			"begin":"\\breact\\b\\s+(\\w+)\\s*\\{",
+			"beginCaptures":{
+				"0":{
+					"name":"keyword.declaration.react.orbis"
+				},
+				"1":{
+					"name":"entity.name.react.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.react.orbis",
+			"patterns":[
+				{
+					"include":"#control-block"
+				}
+			]
+		},
+		"control-block":{
+			"patterns":[
+				{
+					"include":"#when-block"
+				},
+				{
+					"include":"#then-block"
+				},
+				{
+					"include":"#expr-block"
+				}
+			]
+		},
+		"when-block":{
+			"begin":"\\b(when)\\b\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"keyword.control.when.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.control.when.orbis",
+			"patterns":[
+				{
+					"include":"#common"
+				},
+				{
+					"include":"#react-internals"
+				},
+				{
+					"include":"#variable-assignment"
+				},
+				{
+					"include":"#expr-block"
+				}
+			]
+		},
+		"then-block":{
+			"begin":"\\b(then)\\b\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"keyword.control.then.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.control.then.orbis",
+			"patterns":[
+				{
+					"include":"#common"
+				},
+				{
+					"include":"#react-internals"
+				},
+				{
+					"include":"#variable-assignment"
+				},
+				{
+					"include":"#expr-block"
+				}
+			]
+		},
+		"expr-block":{
+			"begin":"\\b(expr)\\b\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"keyword.control.expr.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.block.control.expr.orbis",
+			"patterns":[
+				{
+					"include":"#common"
+				},
+				{
+					"include":"#react-internals"
+				},
+				{
+					"include":"#variable-assignment"
+				}
+			]
+		},
+		"react-internals":{
+			"patterns":[
+				{
+					"include":"#set-assignment"
+				},
+				{
+					"include":"#actions"
+				},
+				{
+					"include":"#dot-selectors"
+				},
+				{
+					"include":"#selectors"
+				}
+			]
+		},
+		"actions":{
+			"patterns":[
+				{
+					"name":"keyword.control.print.orbis",
+					"match":"\\bprint\\b"
+				},
+				{
+					"name":"keyword.control.copy.orbis",
+					"match":"\\bcopy\\b"
+				},
+				{
+					"name":"keyword.control.publish.orbis",
+					"match":"\\bpublish\\b"
+				},
+				{
+					"name":"keyword.control.set.orbis",
+					"match":"\\bset\\b"
+				},
+				{
+					"name":"keyword.control.move.orbis",
+					"match":"\\bmove\\b"
+				}
+			]
+		},
+		"dot-selectors":{
+			"match":"\\b(source|target|message|instrument|room)\\.(\\w+)\\b",
+			"captures":{
+				"1":{
+					"name":"variable.language.orbis"
+				},
+				"2":{
+					"name":"variable.property.orbis"
+				}
+			}
+		},
+		"selectors":{
+			"name":"variable.language.orbis",
+			"match":"\\b(source|target|message|instrument|room)\\b"
+		},
+		"operators":{
+			"name":"keyword.operator.orbis",
+			"match":"\\b(contains|and|or|to)\\b"
+		},
+		"common":{
+			"patterns":[
+				{
+					"include":"#fields"
+				},
+				{
+					"include":"#variable-assignment"
+				},
+				{
+					"include":"#trait-reference"
+				},
+				{
+					"include":"#strings"
+				},
+				{
+					"include":"#operators"
+				}
+			]
+		},
+		"set-assignment":{
+			"match":"\\bset\\b\\s+(\\w+)\\.(\\w+)\\s+to\\s+(\\w+)\\.(\\w+)",
+			"captures":{
+				"1":{
+					"name":"variable.language.orbis"
+				},
+				"2":{
+					"name":"variable.property.orbis"
+				},
+				"3":{
+					"name":"variable.language.orbis"
+				},
+				"4":{
+					"name":"variable.property.orbis"
+				}
 			}
 		},
 		"variable-assignment":{
-			"patterns": [
-				{"include": "#string-variable"},
-				{"include": "#numeric-variable"},
-				{"include": "#boolean-variable"}
+			"patterns":[
+				{
+					"include":"#string-variable"
+				},
+				{
+					"include":"#numeric-variable"
+				},
+				{
+					"include":"#boolean-variable"
+				},
+				{
+					"include":"#array-variable"
+				},
+				{
+					"include":"#map-variable"
+				}
 			]
 		},
 		"string-variable":{
-			"name": "meta.variable.assignment.string.orbis",
-			"match": "^\\s*(\\w+)\\s+is\\s+(\"[^\"]*\")",
-			"captures": {
-				"1": { "name": "variable.other.assignment.orbis" },
-				"2": { "name": "string.quoted.double.orbis" }
+			"name":"meta.variable.assignment.string.orbis",
+			"match":"^\\s*(\\w+)\\s+is\\s+(\"[^\"]*\")",
+			"captures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				},
+				"2":{
+					"name":"string.quoted.double.orbis"
+				}
 			}
 		},
 		"numeric-variable":{
-			"name": "meta.variable.assignment.numeric.orbis",
-			"match": "^\\s*(\\w+)\\s+is\\s+(\\d+(\\.\\d+)?)",
-			"captures": {
-				"1": { "name": "variable.other.assignment.orbis" },
-				"2": { "name": "constant.numeric.orbis" }
+			"name":"meta.variable.assignment.numeric.orbis",
+			"match":"^\\s*(\\w+)\\s+is\\s+(\\d+(\\.\\d+)?)",
+			"captures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				},
+				"2":{
+					"name":"constant.numeric.orbis"
+				}
 			}
-		},	
+		},
 		"boolean-variable":{
-			"name": "meta.variable.assignment.boolean.orbis",
-			"match": "^\\s*(\\w+)\\s+is\\s+(true|false)",
-			"captures": {
-				"1": { "name": "variable.other.assignment.orbis" },
-				"2": { "name": "constant.language.boolean.orbis" }
+			"name":"meta.variable.assignment.boolean.orbis",
+			"match":"^\\s*(\\w+)\\s+is\\s+(true|false)",
+			"captures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				},
+				"2":{
+					"name":"constant.language.boolean.orbis"
+				}
 			}
-		},	
-		"strings": {
-			"name": "string.quoted.double.orbis",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
+		},
+		"array-variable":{
+			"begin":"^\\s*(\\w+)\\s+is\\s*\\[",
+			"beginCaptures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				}
+			},
+			"end":"\\]",
+			"name":"meta.variable.assignment.array.orbis",
+			"patterns":[
 				{
-					"name": "constant.character.escape.orbis",
-					"match": "\\\\."
+					"name":"string.quoted.double.orbis",
+					"match":"\"[^\"]*\""
+				},
+				{
+					"name":"punctuation.separator.array.orbis",
+					"match":","
+				}
+			]
+		},
+		"map-variable":{
+			"begin":"^\\s*(\\w+)\\s+is\\s*\\{",
+			"beginCaptures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				}
+			},
+			"end":"\\}",
+			"name":"meta.variable.assignment.map.orbis",
+			"patterns":[
+				{
+					"name":"string.quoted.key.orbis",
+					"match":"\"[^\"]*\"(?=\\s*:)"
+				},
+				{
+					"name":"punctuation.separator.keyvalue.orbis",
+					"match":":"
+				},
+				{
+					"name":"string.quoted.value.orbis",
+					"match":"(?<=:\\s*)\"[^\"]*\""
+				},
+				{
+					"name":"constant.language.boolean.orbis",
+					"match":"(?<=:\\s*)(true|false)\\b"
+				},
+				{
+					"name":"constant.numeric.orbis",
+					"match":"(?<=:\\s*)(\\d+(\\.\\d+)?)"
+				},
+				{
+					"name":"punctuation.separator.map.orbis",
+					"match":","
+				}
+			]
+		},
+		"interpolation":{
+			"name":"meta.interpolation.orbis",
+			"begin":"\\{",
+			"end":"\\}",
+			"patterns":[
+				{
+					"name":"variable.language.orbis",
+					"match":"\\b(source|target|message|instrument)\\b"
+				},
+				{
+					"name":"variable.property.orbis",
+					"match":"\\.(\\w+)\\b"
+				},
+				{
+					"name":"string.unquoted.orbis",
+					"match":"'[^']*'"
+				},
+				{
+					"name":"keyword.operator.orbis",
+					"match":"\\|"
+				},
+				{
+					"name":"constant.language.style.orbis",
+					"match":"\\b(bold|italic|cyan|yellow|red|green)\\b"
+				}
+			]
+		},
+		"strings":{
+			"name":"string.quoted.double.orbis",
+			"begin":"\"",
+			"end":"\"",
+			"patterns":[
+				{
+					"name":"constant.character.escape.orbis",
+					"match":"\\\\."
+				},
+				{
+					"include":"#interpolation"
 				}
 			]
 		}
 	},
-	"scopeName": "source.orbis"
+	"scopeName":"source.orbis"
 }
