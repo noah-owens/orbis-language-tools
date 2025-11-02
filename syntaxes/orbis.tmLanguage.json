@@ -10,6 +10,9 @@
 		},
 		{
 			"include":"#command-block"
+		},
+		{
+			"include":"#common"
 		}
 	],
 	"repository":{
@@ -20,7 +23,7 @@
 					"name":"keyword.declaration.entity.orbis"
 				},
 				"2":{
-					"name":"entity.name.type.orbis"
+					"name":"entity.name.type.entity.orbis"
 				}
 			},
 			"patterns":[
@@ -47,7 +50,7 @@
 					"name":"keyword.declaration.component.orbis"
 				},
 				"2":{
-					"name":"entity.name.type.orbis"
+					"name":"entity.name.type.component.orbis"
 				}
 			},
 			"patterns":[
@@ -81,7 +84,7 @@
 					"name":"keyword.declaration.trait.orbis"
 				},
 				"1":{
-					"name":"entity.name.type.orbis"
+					"name":"entity.name.type.trait.orbis"
 				}
 			},
 			"end":"\\}",
@@ -105,14 +108,14 @@
 					"name":"keyword.declaration.command.orbis"
 				},
 				"1":{
-					"name":"entity.name.command.orbis"
+					"name":"entity.name.type.command.orbis"
 				}
 			},
 			"end":"\\}",
 			"name":"meta.block.command.orbis",
 			"patterns":[
 				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				},
 				{
 					"include":"#pattern-block"
@@ -133,7 +136,7 @@
 			"name":"meta.block.pattern.orbis",
 			"patterns":[
 				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				},
 				{
 					"include":"#strings"
@@ -194,7 +197,7 @@
 					"include":"#react-internals"
 				},
 				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				},
 				{
 					"include":"#expr-block"
@@ -218,7 +221,7 @@
 					"include":"#react-internals"
 				},
 				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				},
 				{
 					"include":"#expr-block"
@@ -242,7 +245,7 @@
 					"include":"#react-internals"
 				},
 				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				}
 			]
 		},
@@ -283,6 +286,14 @@
 				{
 					"name":"keyword.control.move.orbis",
 					"match":"\\bmove\\b"
+				},
+				{
+					"name":"keyword.control.reveal.orbis",
+					"match":"\\breveal\\b"
+				},
+				{
+					"name":"keyword.control.hide.orbis",
+					"match":"\\bhide\\b"
 				}
 			]
 		},
@@ -293,7 +304,7 @@
 					"name":"variable.language.orbis"
 				},
 				"2":{
-					"name":"variable.property.orbis"
+					"name":"variable.parameter.orbis"
 				}
 			}
 		},
@@ -303,15 +314,12 @@
 		},
 		"operators":{
 			"name":"keyword.operator.orbis",
-			"match":"\\b(contains|and|or|to)\\b"
+			"match":"\\b(contains|and|or|to|not|has)\\b"
 		},
 		"common":{
 			"patterns":[
 				{
-					"include":"#fields"
-				},
-				{
-					"include":"#variable-assignment"
+					"include":"#field-assignment"
 				},
 				{
 					"include":"#trait-reference"
@@ -321,6 +329,15 @@
 				},
 				{
 					"include":"#operators"
+				},
+				{
+					"include":"#booleans"
+				},
+				{
+					"include":"#line-comment"
+				},
+				{
+					"include":"#block-comment"
 				}
 			]
 		},
@@ -331,37 +348,40 @@
 					"name":"variable.language.orbis"
 				},
 				"2":{
-					"name":"variable.property.orbis"
+					"name":"variable.field.orbis"
 				},
 				"3":{
 					"name":"variable.language.orbis"
 				},
 				"4":{
-					"name":"variable.property.orbis"
+					"name":"variable.field.orbis"
 				}
 			}
 		},
-		"variable-assignment":{
+		"field-assignment":{
 			"patterns":[
 				{
-					"include":"#string-variable"
+					"include":"#string-field"
 				},
 				{
-					"include":"#numeric-variable"
+					"include":"#numeric-field"
 				},
 				{
-					"include":"#boolean-variable"
+					"include":"#boolean-field"
 				},
 				{
-					"include":"#array-variable"
+					"include":"#array-field"
 				},
 				{
-					"include":"#map-variable"
+					"include":"#map-field"
+				},
+				{
+					"include":"#paren-expression-field"
 				}
 			]
 		},
-		"string-variable":{
-			"name":"meta.variable.assignment.string.orbis",
+		"string-field":{
+			"name":"meta.field.assignment.string.orbis",
 			"match":"^\\s*(\\w+)\\s+is\\s+(\"[^\"]*\")",
 			"captures":{
 				"1":{
@@ -372,8 +392,8 @@
 				}
 			}
 		},
-		"numeric-variable":{
-			"name":"meta.variable.assignment.numeric.orbis",
+		"numeric-field":{
+			"name":"meta.field.assignment.numeric.orbis",
 			"match":"^\\s*(\\w+)\\s+is\\s+(\\d+(\\.\\d+)?)",
 			"captures":{
 				"1":{
@@ -384,8 +404,8 @@
 				}
 			}
 		},
-		"boolean-variable":{
-			"name":"meta.variable.assignment.boolean.orbis",
+		"boolean-field":{
+			"name":"meta.field.assignment.boolean.orbis",
 			"match":"^\\s*(\\w+)\\s+is\\s+(true|false)",
 			"captures":{
 				"1":{
@@ -396,7 +416,7 @@
 				}
 			}
 		},
-		"array-variable":{
+		"array-field":{
 			"begin":"^\\s*(\\w+)\\s+is\\s*\\[",
 			"beginCaptures":{
 				"1":{
@@ -404,7 +424,7 @@
 				}
 			},
 			"end":"\\]",
-			"name":"meta.variable.assignment.array.orbis",
+			"name":"meta.field.assignment.array.orbis",
 			"patterns":[
 				{
 					"name":"string.quoted.double.orbis",
@@ -416,7 +436,7 @@
 				}
 			]
 		},
-		"map-variable":{
+		"map-field":{
 			"begin":"^\\s*(\\w+)\\s+is\\s*\\{",
 			"beginCaptures":{
 				"1":{
@@ -424,7 +444,7 @@
 				}
 			},
 			"end":"\\}",
-			"name":"meta.variable.assignment.map.orbis",
+			"name":"meta.field.assignment.map.orbis",
 			"patterns":[
 				{
 					"name":"string.quoted.key.orbis",
@@ -452,17 +472,46 @@
 				}
 			]
 		},
+		"paren-expression-field":{
+			"begin":"^\\s*(\\w+)\\s+is\\s*\\(",
+			"beginCaptures":{
+				"1":{
+					"name":"variable.other.assignment.orbis"
+				}
+			},
+			"end":"\\)",
+			"name":"meta.field.assignment.expression.orbis",
+			"patterns":[
+				{
+					"include":"#dot-selectors"
+				},
+				{
+					"include":"#selectors"
+				},
+				{
+					"include":"#operators"
+				},
+				{
+					"name":"constant.numeric.orbis",
+					"match":"\\b\\d+(\\.\\d+)?\\b"
+				},
+				{
+					"name":"constant.language.boolean.orbis",
+					"match":"\\b(true|false)\\b"
+				}
+			]
+		},
 		"interpolation":{
 			"name":"meta.interpolation.orbis",
 			"begin":"\\{",
 			"end":"\\}",
 			"patterns":[
 				{
-					"name":"variable.language.orbis",
+					"name":"field.language.orbis",
 					"match":"\\b(source|target|message|instrument)\\b"
 				},
 				{
-					"name":"variable.property.orbis",
+					"name":"field.property.orbis",
 					"match":"\\.(\\w+)\\b"
 				},
 				{
@@ -492,6 +541,19 @@
 					"include":"#interpolation"
 				}
 			]
+		},
+		"booleans":{
+			"name":"constant.language.boolean.orbis",
+			"match":"\\b(true|false)\\b"
+		},
+		"line-comment":{
+			"name":"comment.line.double-slash.orbis",
+			"match":"//.*$"
+		},
+		"block-comment":{
+			"name":"comment.block.orbis",
+			"begin":"/\\*",
+			"end":"\\*/"
 		}
 	},
 	"scopeName":"source.orbis"

@@ -2,7 +2,7 @@
   "name": "orbis-language-tools",
   "displayName": "Orbis Language Tools",
   "description": "Syntax highlighting and code completion for Orbis Definition Language",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "engines": {
     "vscode": "^1.105.0"
   },

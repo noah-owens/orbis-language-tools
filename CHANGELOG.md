@@ -14,6 +14,15 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Removed
 
+## [0.4.0] 2025-11-02
+
+### Added
+- Syntax highlights for comments
+- Syntax highlights for expressions in field declaration
+
+### Changed
+- Internal names of some rules to be more consistent with the engine
+
 ## [0.3.0] 2025-10-30
 
 ### Added
