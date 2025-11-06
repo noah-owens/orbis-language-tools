@@ -129,7 +129,7 @@
 			"begin":"\\bpattern\\b\\s*\\{",
 			"beginCaptures":{
 				"0":{
-					"name":"keyword.control.pattern.orbis"
+					"name":"keyword.declaration.pattern.orbis"
 				}
 			},
 			"end":"\\}",
@@ -150,18 +150,34 @@
 			]
 		},
 		"react-block":{
-			"begin":"\\breact\\b\\s+(\\w+)\\s*\\{",
+			"begin":"\\breact\\b\\s+((?:\\w+\\s*,\\s*)*\\w+)\\s*\\{",
 			"beginCaptures":{
 				"0":{
 					"name":"keyword.declaration.react.orbis"
-				},
-				"1":{
-					"name":"entity.name.react.orbis"
 				}
 			},
 			"end":"\\}",
 			"name":"meta.block.react.orbis",
 			"patterns":[
+				{
+					"begin":"\\breact\\b\\s+((?:\\w+\\s*,\\s*)*\\w+)",
+					"beginCaptures":{
+						"1":{
+							"name":"entity.name.command.orbis"
+						}
+					},
+					"end":"\\{",
+					"patterns":[
+						{
+							"match":"\\b(\\w+)\\b",
+							"name":"entity.name.command.orbis"
+						},
+						{
+							"match":",",
+							"name":"punctuation.separator.command.orbis"
+						}
+					]
+				},
 				{
 					"include":"#control-block"
 				}
